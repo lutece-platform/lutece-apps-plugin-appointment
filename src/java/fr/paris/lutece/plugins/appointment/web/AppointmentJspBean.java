@@ -1147,6 +1147,11 @@ public class AppointmentJspBean extends MVCAdminJspBean
 
         if ( CollectionUtils.isNotEmpty( listFormErrors ) )
         {
+            getModel( ).put( MARK_FORM_ERRORS, listFormErrors );
+            for ( GenericAttributeError error : listFormErrors )
+            {
+                addError( error.getErrorMessage( ) );
+            }
             LinkedHashMap<String, String> additionalParameters = new LinkedHashMap<>( );
             additionalParameters.put( PARAMETER_ID_FORM, strIdForm );
             additionalParameters.put( PARAMETER_STARTING_DATE_TIME, _notValidatedAppointment.getStartingDateTime( ).toString( ) );
@@ -1440,7 +1445,7 @@ public class AppointmentJspBean extends MVCAdminJspBean
 
         int nIdResponse = Integer.parseInt( strIdResponse );
         Response response = ResponseHome.findByPrimaryKey( nIdResponse );
-        
+
         // load from default generic attribute file service
     	File file = GenericAttributeFileService.getInstance().load( response.getFile( ).getFileKey( ), null);
 
