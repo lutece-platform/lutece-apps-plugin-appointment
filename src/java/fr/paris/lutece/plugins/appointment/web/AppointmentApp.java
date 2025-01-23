@@ -1497,7 +1497,7 @@ public class AppointmentApp extends MVCApplication
             return null;
         }
         LuteceUser luteceUser = SecurityService.getInstance( ).getRegisteredUser( request );
-        if ( luteceUser != null )
+        if ( luteceUser == null )
         {
             throw new UserNotSignedException( );
         }
